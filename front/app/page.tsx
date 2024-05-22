@@ -2,17 +2,39 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
+// * コンポーネントのインポート
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
+	CardFooter,
+} from '@/components/ui/card';
+
 export default async function Home() {
 	const supabase = createServerComponentClient({ cookies });
 	const { data: lessons, error } = await supabase.from('lesson').select('*');
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			{lessons?.map((lesson: any) => (
-				<Link href={`/${lesson.id}`} key={lesson.id}>
-					{lesson.title}
-				</Link>
-			))}
+		<main className="w-full max-w-3xl mx-auto my-16 px-2">
+			<div className="flex flex-col gap-3">
+				{lessons?.map((lesson: any) => (
+					<Link href={`/${lesson.id}`} key={lesson.id}>
+						<Card>
+							<CardHeader>
+								<CardTitle>{lesson.title}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<p>{lesson.description}</p>
+							</CardContent>
+							<CardFooter>
+								<p>Card Footer</p>
+							</CardFooter>
+						</Card>
+					</Link>
+				))}
+			</div>
 		</main>
 	);
 }
