@@ -11,8 +11,12 @@ import {
 	CardContent,
 	CardFooter,
 } from '@/components/ui/card';
+import { Database } from '@/lib/database.types';
 
-const supabase = createServerComponentClient({ cookies });
+// * Supabaseの初期化
+const supabase = createServerComponentClient<Database>({ cookies });
+
+// * All Lessonsを取得するメソッド
 const getAlllessons = async () => {
 	const { data: lessons, error } = await supabase.from('lesson').select('*');
 	return lessons;
