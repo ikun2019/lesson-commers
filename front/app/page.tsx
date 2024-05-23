@@ -12,9 +12,14 @@ import {
 	CardFooter,
 } from '@/components/ui/card';
 
-export default async function Home() {
-	const supabase = createServerComponentClient({ cookies });
+const supabase = createServerComponentClient({ cookies });
+const getAlllessons = async () => {
 	const { data: lessons, error } = await supabase.from('lesson').select('*');
+	return lessons;
+};
+
+export default async function Home() {
+	const lessons = await getAlllessons();
 
 	return (
 		<main className="w-full max-w-3xl mx-auto my-16 px-2">
