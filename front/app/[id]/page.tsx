@@ -1,19 +1,18 @@
 import React from 'react';
 import { cookies } from 'next/headers';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createServerComponentClient, SupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '@/lib/database.types';
 
-// * Supabaseの初期化
-const supabase = createServerComponentClient<Database>({ cookies });
-
 // * Single Lessonを取得するメソッド
-const getDetailLesson = async (id: number) => {
+const getDetailLesson = async (id: number, supabase: SupabaseClient<Database>) => {
 	const { data: lesson, error } = await supabase.from('lesson').select('*').eq('id', id).single();
 	return lesson;
 };
 
 const LessonDetailPage = async ({ params }: { params: { id: number } }) => {
-	const lesson = await getDetailLesson(params.id);
+	// * Supabaseの初期化
+	const supabase = createServerComponentClient<Database>({ cookies });
+	const lesson = await getDetailLesson(params.id, supabase);
 	console.log('LessonDetailPage =>', lesson);
 
 	return (
