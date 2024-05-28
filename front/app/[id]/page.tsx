@@ -26,8 +26,10 @@ const getPremiumContent = async (id: number, supabase: SupabaseClient<Database>)
 const LessonDetailPage = async ({ params }: { params: { id: number } }) => {
 	// * Supabaseの初期化
 	const supabase = createServerComponentClient<Database>({ cookies });
-	const lesson = await getDetailLesson(params.id, supabase);
-	const video = await getPremiumContent(params.id, supabase);
+	const [lesson, video] = await Promise.all([
+		await getDetailLesson(params.id, supabase),
+		await getPremiumContent(params.id, supabase),
+	]);
 	const videoId = extractYouTubeVideoId(video?.video_url) as string;
 
 	return (
