@@ -14,6 +14,7 @@ import {
 	CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import SubscriptionButton from '@/components/checkout/SubscriptionButton';
 
 interface Plan {
 	id: string;
@@ -62,7 +63,7 @@ const PricingPage = async () => {
 
 	return (
 		<div className="w-full max-w-3xl mx-auto py-16 flex justify-around">
-			{plans.map((plan) => (
+			{plans.map((plan: any) => (
 				<Card className="shadow-md" key={plan.id}>
 					<CardHeader>
 						<CardTitle>{plan.name}プラン</CardTitle>
@@ -72,7 +73,7 @@ const PricingPage = async () => {
 						{plan.price}円 / {plan.interval}
 					</CardContent>
 					<CardFooter>
-						{showSubscribeButton && <Button>サブスクリプション契約する</Button>}
+						{showSubscribeButton && <SubscriptionButton planId={plan.id} />}
 						{showCreateAccountButton && <Button>ログインする</Button>}
 						{showManageSubscription && <Button>管理する</Button>}
 					</CardFooter>
