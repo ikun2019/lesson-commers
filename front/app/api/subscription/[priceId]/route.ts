@@ -29,7 +29,7 @@ export async function GET(req: NextRequest, { params }: { params: { priceId: str
 		payment_method_types: ['card'],
 		line_items: [{ price: priceId, quantity: 1 }],
 		success_url: 'http://localhost:3000/payment/success',
-		cancel_url: 'http://localhost:3000/payment/canceled',
+		cancel_url: 'http://localhost:3000/payment/cancelled',
 	});
 
 	return NextResponse.json({
