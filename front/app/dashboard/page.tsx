@@ -3,6 +3,7 @@ import { SupabaseClient, createServerComponentClient } from '@supabase/auth-help
 import { cookies } from 'next/headers';
 
 import { Database } from '@/lib/database.types';
+import SubscriptionManagementButton from '@/components/checkout/SubscriptionManagementButton';
 
 const getProfileData = async (supabase: SupabaseClient<Database>) => {
 	const { data: profile } = await supabase.from('profile').select('*').single();
@@ -17,8 +18,10 @@ const Dashboard = async () => {
 		<div className="w-full max-w-3xl mx-auto py-16 px-8">
 			<h1 className="text-3xl mb-6">ユーザー管理ダッシュボード</h1>
 			<div>
-				<div>{profile?.is_subscribed ? `プラン契約中: ${profile.interval}` : 'プラン未加入'}</div>
-				<button>サブスクリプション管理</button>
+				<div className="mb-3">
+					{profile?.is_subscribed ? `プラン契約中: ${profile.interval}` : 'プラン未加入'}
+				</div>
+				<SubscriptionManagementButton />
 			</div>
 		</div>
 	);
