@@ -11,6 +11,7 @@ const getProfileData = async (supabase: SupabaseClient<Database>) => {
 };
 
 const Dashboard = async () => {
+	cookies().getAll();
 	const supabase = createServerComponentClient({ cookies });
 	const profile = await getProfileData(supabase);
 

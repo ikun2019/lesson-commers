@@ -7,6 +7,7 @@ import Link from 'next/link';
 import AuthServerButton from './auth/AuthServerButton';
 
 const Header = async () => {
+	cookies().getAll();
 	const supabase = createServerComponentClient({ cookies });
 	const { data: user } = await supabase.auth.getSession();
 	console.log('user =>', user);

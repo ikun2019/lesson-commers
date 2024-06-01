@@ -5,6 +5,7 @@ import initStripe from 'stripe';
 import { Database } from '@/lib/database.types';
 
 export async function POST(req: NextRequest) {
+	cookies().getAll();
 	const supabase = createRouteHandlerClient<Database>({ cookies });
 	const stripe = new initStripe(process.env.STRIPE_SECRET_KEY!);
 	const endpointSecret = process.env.STRIPE_SIGNING_SECRET;

@@ -54,6 +54,7 @@ const getProfileData = async (supabase: SupabaseClient<Database>) => {
 };
 
 const PricingPage = async () => {
+	cookies().getAll();
 	const supabase = createServerComponentClient({ cookies });
 	const { data: user } = await supabase.auth.getSession();
 

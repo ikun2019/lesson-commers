@@ -14,6 +14,7 @@ import {
 import { Database } from '@/lib/database.types';
 
 // * Supabaseの初期化
+cookies().getAll();
 const supabase = createServerComponentClient<Database>({ cookies });
 
 // * All Lessonsを取得するメソッド

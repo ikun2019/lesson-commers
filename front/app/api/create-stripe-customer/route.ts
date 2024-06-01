@@ -4,6 +4,7 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import initStripe from 'stripe';
 
 export async function POST(req: NextRequest) {
+	cookies().getAll();
 	const supabase = createRouteHandlerClient({ cookies });
 	const query = req.nextUrl.searchParams.get('API_ROOT_SECRET');
 	if (query !== process.env.API_ROOT_SECRET) {

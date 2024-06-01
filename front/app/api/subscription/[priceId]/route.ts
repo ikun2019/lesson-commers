@@ -5,6 +5,7 @@ import initStripe from 'stripe';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 
 export async function GET(req: NextRequest, { params }: { params: { priceId: string } }) {
+	cookies().getAll();
 	const supabase = createRouteHandlerClient({ cookies });
 	const { data } = await supabase.auth.getUser();
 	const user = data.user;

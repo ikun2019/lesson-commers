@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import initStripe from 'stripe';
 
 export async function GET(req: NextRequest) {
+	cookies().getAll();
 	const supabase = await createRouteHandlerClient({ cookies });
 	const { data } = await supabase.auth.getUser();
 	const user = data.user;
