@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import SubscriptionButton from '@/components/checkout/SubscriptionButton';
 import AuthServerButton from '@/components/auth/AuthServerButton';
+import Link from 'next/link';
 
 interface Plan {
 	id: string;
@@ -76,7 +77,11 @@ const PricingPage = async () => {
 					<CardFooter>
 						{showSubscribeButton && <SubscriptionButton planId={plan.id} />}
 						{showCreateAccountButton && <AuthServerButton />}
-						{showManageSubscription && <Button>管理する</Button>}
+						{showManageSubscription && (
+							<Button>
+								<Link href="/dashboard">サブスクリプションを管理する</Link>
+							</Button>
+						)}
 					</CardFooter>
 				</Card>
 			))}
